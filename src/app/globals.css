@@ -1,26 +1,308 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ===================================================
+   TAILWIND THEME REGISTRATION
+   Minimal @theme block so Tailwind utility classes
+   (e.g. font-sans) work. Actual values are injected
+   at runtime from src/config/design-tokens.ts
+   =================================================== */
+
+@theme {
+  --font-sans: "Inter", "Inter Placeholder", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", "Georgia", serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ===================================================
+   EDITOR.JS TAILWIND PREFLIGHT RESTORATION
+   Tailwind's base reset removes font-sizes and list styles.
+   We restore them specifically for Editor.js blocks here.
+   =================================================== */
+
+.editorjs-wrapper {
+  /* Fix Editor.js toolbar overlapping text on narrow screens by giving it a dedicated left gutter */
+  padding-left: 56px; 
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.editorjs-wrapper .ce-header {
+  color: var(--color-gray-900);
+}
+.editorjs-wrapper h1.ce-header { font-size: 2.25em; font-weight: 800; margin-top: 1em; margin-bottom: 0.5em; line-height: 1.2; }
+.editorjs-wrapper h2.ce-header { font-size: 1.875em; font-weight: 700; margin-top: 1em; margin-bottom: 0.5em; line-height: 1.3; }
+.editorjs-wrapper h3.ce-header { font-size: 1.5em; font-weight: 700; margin-top: 1em; margin-bottom: 0.5em; line-height: 1.4; }
+.editorjs-wrapper h4.ce-header { font-size: 1.25em; font-weight: 600; margin-top: 1em; margin-bottom: 0.2em; }
+.editorjs-wrapper h5.ce-header { font-size: 1.125em; font-weight: 600; }
+.editorjs-wrapper h6.ce-header { font-size: 1em; font-weight: 600; }
+
+.editorjs-wrapper .cdx-list {
+  margin: 1em 0;
+  padding-left: 2em;
+}
+.editorjs-wrapper .cdx-list--unordered {
+  list-style-type: disc;
+}
+.editorjs-wrapper .cdx-list--ordered {
+  list-style-type: decimal;
+}
+.editorjs-wrapper .cdx-list__item {
+  padding: 0.25em 0;
+}
+
+
+/* ===================================================
+   BASE STYLES
+   =================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Global element transitions for smooth theme changes */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+li,
+a,
+section,
+header,
+footer,
+div,
+svg,
+path {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transition-duration: 600ms;
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  transition: background-color 0.6s ease;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: var(--text-base);
+  line-height: 1.6;
+}
+
+/* ===================================================
+   SCROLLBAR
+   =================================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* ===================================================
+   DOT GRID BACKGROUND — revealed around cursor
+   Uses ::before pseudo-element so it sits BETWEEN the
+   section background and section content (true bg layer).
+   JS sets --cursor-x / --cursor-y on :root.
+   =================================================== */
+
+:root {
+  --cursor-x: -200px;
+  --cursor-y: -200px;
+}
+
+/* Specific component dot grid (used in Hero) */
+.dot-grid-reveal {
+  position: relative;
+}
+
+.dot-grid-reveal>* {
+  position: relative;
+  z-index: 1;
+}
+
+.dot-grid-reveal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.13) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(circle 200px at var(--cursor-x) var(--cursor-y), black 0%, transparent 100%);
+  mask-image: radial-gradient(circle 200px at var(--cursor-x) var(--cursor-y), black 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Global Light Theme Dot Background (Hover Reactive) */
+body[data-active-theme="light"]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  /* Faint dots everywhere */
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+body[data-active-theme="light"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  /* Darker dots revealed near cursor */
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.2) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(circle 250px at var(--cursor-clientX, -200px) var(--cursor-clientY, -200px), black 0%, transparent 100%);
+  mask-image: radial-gradient(circle 250px at var(--cursor-clientX, -200px) var(--cursor-clientY, -200px), black 0%, transparent 100%);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* ===================================================
+   SECTION SPACING UTILITIES
+   =================================================== */
+
+.section-padding {
+  padding-top: var(--space-24);
+  padding-bottom: var(--space-24);
+  padding-left: var(--space-6);
+  padding-right: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: var(--space-32);
+    padding-bottom: var(--space-32);
+    padding-left: var(--space-16);
+    padding-right: var(--space-16);
+  }
+}
+
+/* ===================================================
+   ANIMATIONS
+   =================================================== */
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s var(--ease-out) forwards;
+}
+
+.animate-slide-in {
+  animation: slide-in 0.6s var(--ease-out) forwards;
+}
+
+/* Stagger children */
+.stagger-children>* {
+  opacity: 0;
+  animation: fade-in-up 0.6s var(--ease-out) forwards;
+}
+
+.stagger-children>*:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.stagger-children>*:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.stagger-children>*:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.stagger-children>*:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.stagger-children>*:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.stagger-children>*:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+/* ===================================================
+   DIVIDER
+   =================================================== */
+
+.section-divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(800px, 90%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.section-divider-light {
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08), transparent);
 }

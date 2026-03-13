@@ -1,0 +1,18 @@
+Frontend
+Next.js
+Tailwind
+
+Content
+Editor.js
+
+Backend
+PostgreSQL
+
+ORM
+DrizzleORM
+
+Storage
+Filebase
+
+Animation
+Framer Motion

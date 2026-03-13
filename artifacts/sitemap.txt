@@ -1,0 +1,39 @@
+/
+
+/about
+
+/work
+    /[slug]
+
+/experiments
+    /[slug]
+
+/writinng
+    /[slug]
+
+/contact
+
+/admin
+   /dashboard
+
+   /work
+      /create
+      /[id]
+      /[id]/edit
+
+   /experiments
+      /create
+      /[id]
+      /[id]/edit
+
+   /writing
+      /create
+      /[id]
+      /[id]/edit
+
+   /media
+
+   /categories
+   /tags
+
+   /settings
