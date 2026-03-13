@@ -29,11 +29,15 @@ export async function GET(req: Request, context: { params: Params }) {
     }
 
     // Try to order by createdAt if the field exists securely
-    let query = db.select().from(table);
-    if ("createdAt" in table) {
-      query = query.orderBy(desc(table.createdAt));
-    }
-    
+    // let query = db.select().from(table);
+    // if ("createdAt" in table) {
+    //   query = query.orderBy(desc(table.createdAt));
+    // }
+    const query =
+      "createdAt" in table
+        ? db.select().from(table).orderBy(desc(table.createdAt))
+        : db.select().from(table);
+
     const data = await query;
     return NextResponse.json(data);
   } catch (error) {

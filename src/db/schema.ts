@@ -81,7 +81,7 @@ export const experiments = pgTable("experiments", {
   slug: varchar("slug", { length: 255 }).notNull().unique(),
   description: text("description").notNull(),
   content: json("content"), // For Editor.js
-  techStack: json("tech_stack"), // Array of strings or object representation
+  techStack: json("tech_stack").$type<string[]>(), // Array of strings or object representation
   githubUrl: varchar("github_url", { length: 512 }),
   liveUrl: varchar("live_url", { length: 512 }),
   coverImage: varchar("cover_image", { length: 512 }),

@@ -30,9 +30,9 @@ const EditorComponent: React.FC<EditorProps> = ({ data, onChange, holder = "edit
     if (editorRef.current) return;
 
     const initializeEditor = async () => {
-      const Header = (await import("@editorjs/header")).default;
+      const Header = (await import("@editorjs/header")).default as any;
       const List = (await import("@editorjs/list")).default;
-      const Paragraph = (await import("@editorjs/paragraph")).default;
+      const Paragraph = (await import("@editorjs/paragraph")).default as any;
       const Embed = (await import("@editorjs/embed")).default;
       const ImageTool = (await import("@editorjs/image")).default;
 

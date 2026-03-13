@@ -53,7 +53,7 @@ async function ExperimentSinglePageContent({ slug }: { slug: string }) {
           
           {experiment.techStack && Array.isArray(experiment.techStack) && (
             <div className="flex flex-wrap gap-2 mb-8">
-              {(experiment.techStack as string[]).map((tech, i) => (
+              {experiment.techStack.map((tech, i) => (
                 <span key={i} className="inline-flex items-center rounded-md bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
                   {tech}
                 </span>
