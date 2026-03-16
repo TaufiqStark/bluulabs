@@ -161,14 +161,14 @@ export default async function AdminAnalyticsPage() {
       <div className="space-y-6">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight text-white">Analytics</h1>
-            <p className="mt-1 text-sm text-white/60">
+            <h1 className="text-2xl font-semibold tracking-tight admin-text">Analytics</h1>
+            <p className="mt-1 text-sm admin-muted">
               Content health, publishing velocity, and what deserves attention next.
             </p>
           </div>
           <Link
             href="/admin/dashboard"
-            className="text-sm text-white/70 hover:text-white underline underline-offset-4 decoration-white/25 hover:decoration-white/50"
+            className="text-sm admin-soft hover:text-[var(--admin-fg)] underline underline-offset-4 decoration-current/30 hover:decoration-current/60"
           >
             Back to overview
           </Link>
@@ -176,36 +176,36 @@ export default async function AdminAnalyticsPage() {
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <GlassCard className="p-5">
-            <div className="text-[11px] font-semibold uppercase tracking-widest text-white/50">Publish rate</div>
+            <div className="text-[11px] font-semibold uppercase tracking-widest admin-muted">Publish rate</div>
             <div className="mt-2 flex items-end justify-between gap-4">
-              <div className="text-3xl font-semibold tracking-tight text-white">{publishRate}%</div>
-              <div className="text-xs text-white/55">
+              <div className="text-3xl font-semibold tracking-tight admin-text">{publishRate}%</div>
+              <div className="text-xs admin-muted">
                 {formatNumber(totals.worksPublished + totals.experimentsPublished + totals.writingsPublished)} published
               </div>
             </div>
           </GlassCard>
 
           <GlassCard className="p-5">
-            <div className="text-[11px] font-semibold uppercase tracking-widest text-white/50">Works</div>
+            <div className="text-[11px] font-semibold uppercase tracking-widest admin-muted">Works</div>
             <div className="mt-2 flex items-end justify-between gap-4">
-              <div className="text-3xl font-semibold tracking-tight text-white">{formatNumber(totals.works)}</div>
-              <div className="text-xs text-white/55">{formatNumber(totals.worksPublished)} published</div>
+              <div className="text-3xl font-semibold tracking-tight admin-text">{formatNumber(totals.works)}</div>
+              <div className="text-xs admin-muted">{formatNumber(totals.worksPublished)} published</div>
             </div>
           </GlassCard>
 
           <GlassCard className="p-5">
-            <div className="text-[11px] font-semibold uppercase tracking-widest text-white/50">Experiments</div>
+            <div className="text-[11px] font-semibold uppercase tracking-widest admin-muted">Experiments</div>
             <div className="mt-2 flex items-end justify-between gap-4">
-              <div className="text-3xl font-semibold tracking-tight text-white">{formatNumber(totals.experiments)}</div>
-              <div className="text-xs text-white/55">{formatNumber(totals.experimentsPublished)} published</div>
+              <div className="text-3xl font-semibold tracking-tight admin-text">{formatNumber(totals.experiments)}</div>
+              <div className="text-xs admin-muted">{formatNumber(totals.experimentsPublished)} published</div>
             </div>
           </GlassCard>
 
           <GlassCard className="p-5">
-            <div className="text-[11px] font-semibold uppercase tracking-widest text-white/50">Writings</div>
+            <div className="text-[11px] font-semibold uppercase tracking-widest admin-muted">Writings</div>
             <div className="mt-2 flex items-end justify-between gap-4">
-              <div className="text-3xl font-semibold tracking-tight text-white">{formatNumber(totals.writings)}</div>
-              <div className="text-xs text-white/55">{formatNumber(totals.writingsPublished)} published</div>
+              <div className="text-3xl font-semibold tracking-tight admin-text">{formatNumber(totals.writings)}</div>
+              <div className="text-xs admin-muted">{formatNumber(totals.writingsPublished)} published</div>
             </div>
           </GlassCard>
         </div>
@@ -214,8 +214,8 @@ export default async function AdminAnalyticsPage() {
           <GlassCard className="p-5 lg:col-span-2">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <div className="text-[11px] font-semibold uppercase tracking-widest text-white/50">Velocity</div>
-                <div className="mt-1 text-sm text-white/70">New items created (last 7 days)</div>
+                <div className="text-[11px] font-semibold uppercase tracking-widest admin-muted">Velocity</div>
+                <div className="mt-1 text-sm admin-soft">New items created (last 7 days)</div>
               </div>
               <MiniBars values={velocityValues} />
             </div>
@@ -223,20 +223,20 @@ export default async function AdminAnalyticsPage() {
               {velocityDays.map((d, idx) => (
                 <div
                   key={d.format("YYYY-MM-DD")}
-                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70"
+                  className="rounded-full border border-[var(--admin-border)] bg-[var(--admin-glass-bg)] px-3 py-1 text-xs admin-soft"
                   title={d.format("YYYY-MM-DD")}
                 >
-                  {d.format("ddd")} <span className="text-white/90">{velocityValues[idx]}</span>
+                  {d.format("ddd")} <span className="admin-text">{velocityValues[idx]}</span>
                 </div>
               ))}
             </div>
           </GlassCard>
 
           <GlassCard className="p-5">
-            <div className="text-[11px] font-semibold uppercase tracking-widest text-white/50">Media library</div>
-            <div className="mt-2 text-3xl font-semibold tracking-tight text-white">{formatNumber(totals.media)}</div>
-            <div className="mt-1 text-sm text-white/60">Files in storage</div>
-            <div className="mt-4 text-xs text-white/55">
+            <div className="text-[11px] font-semibold uppercase tracking-widest admin-muted">Media library</div>
+            <div className="mt-2 text-3xl font-semibold tracking-tight admin-text">{formatNumber(totals.media)}</div>
+            <div className="mt-1 text-sm admin-muted">Files in storage</div>
+            <div className="mt-4 text-xs admin-muted">
               Tip: add image compression + hash dedupe to keep it lean.
             </div>
           </GlassCard>
@@ -246,12 +246,12 @@ export default async function AdminAnalyticsPage() {
           <GlassCard className="p-5">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <div className="text-[11px] font-semibold uppercase tracking-widest text-white/50">Top categories</div>
-                <div className="mt-1 text-sm text-white/70">Works distribution</div>
+                <div className="text-[11px] font-semibold uppercase tracking-widest admin-muted">Top categories</div>
+                <div className="mt-1 text-sm admin-soft">Works distribution</div>
               </div>
               <Link
                 href="/admin/categories"
-                className="text-xs text-white/70 hover:text-white underline underline-offset-4 decoration-white/20 hover:decoration-white/40"
+                className="text-xs admin-soft hover:text-[var(--admin-fg)] underline underline-offset-4 decoration-current/30 hover:decoration-current/60"
               >
                 Manage
               </Link>
@@ -259,15 +259,15 @@ export default async function AdminAnalyticsPage() {
 
             <div className="mt-4 space-y-2">
               {topCategories.length === 0 ? (
-                <div className="text-sm text-white/60">No categories yet.</div>
+                <div className="text-sm admin-muted">No categories yet.</div>
               ) : (
                 topCategories.map((c) => (
                   <div key={c.slug} className="flex items-center justify-between gap-4">
                     <div className="min-w-0">
-                      <div className="truncate text-sm font-medium text-white">{c.name}</div>
-                      <div className="text-xs text-white/55">{c.slug}</div>
+                      <div className="truncate text-sm font-medium admin-text">{c.name}</div>
+                      <div className="text-xs admin-muted">{c.slug}</div>
                     </div>
-                    <div className="shrink-0 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/75">
+                    <div className="shrink-0 rounded-full border border-[var(--admin-border)] bg-[var(--admin-glass-bg)] px-3 py-1 text-xs admin-soft">
                       {formatNumber(Number(c.value))}
                     </div>
                   </div>
@@ -279,28 +279,28 @@ export default async function AdminAnalyticsPage() {
           <GlassCard className="p-5">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <div className="text-[11px] font-semibold uppercase tracking-widest text-white/50">Recently updated</div>
-                <div className="mt-1 text-sm text-white/70">Last 8 edits</div>
+                <div className="text-[11px] font-semibold uppercase tracking-widest admin-muted">Recently updated</div>
+                <div className="mt-1 text-sm admin-soft">Last 8 edits</div>
               </div>
             </div>
 
             <div className="mt-4 space-y-2">
               {latest.length === 0 ? (
-                <div className="text-sm text-white/60">No content yet.</div>
+                <div className="text-sm admin-muted">No content yet.</div>
               ) : (
                 latest.map((item) => (
                   <Link
                     key={`${item.type}-${item.href}`}
                     href={item.href}
-                    className="group flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
+                    className="group flex items-center justify-between gap-3 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-glass-bg)] px-3 py-2 hover:bg-[var(--admin-glass-bg-2)]"
                   >
                     <div className="min-w-0">
-                      <div className="truncate text-sm font-medium text-white">{item.title}</div>
-                      <div className="text-xs text-white/55">
+                      <div className="truncate text-sm font-medium admin-text">{item.title}</div>
+                      <div className="text-xs admin-muted">
                         {item.type} · {dayjs(item.updatedAt).format("D MMM YYYY")}
                       </div>
                     </div>
-                    <div className="shrink-0 text-xs text-white/60 group-hover:text-white">Open</div>
+                    <div className="shrink-0 text-xs admin-muted group-hover:text-[var(--admin-fg)]">Open</div>
                   </Link>
                 ))
               )}
@@ -311,8 +311,8 @@ export default async function AdminAnalyticsPage() {
         <GlassCard className="p-5">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <div className="text-sm font-semibold text-white">Upgrade to real traffic analytics</div>
-              <div className="text-sm text-white/60">
+              <div className="text-sm font-semibold admin-text">Upgrade to real traffic analytics</div>
+              <div className="text-sm admin-muted">
                 This page currently analyzes content in your database. If you want visitor analytics, plug in Plausible, GA,
                 or your own event pipeline.
               </div>
@@ -320,13 +320,13 @@ export default async function AdminAnalyticsPage() {
             <div className="flex flex-wrap gap-2">
               <Link
                 href="/admin/settings"
-                className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-medium text-white/80 hover:bg-white/10 hover:text-white"
+                className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-glass-bg)] px-3 py-2 text-xs font-medium admin-soft hover:bg-[var(--admin-glass-bg-2)] hover:text-[var(--admin-fg)]"
               >
                 Settings
               </Link>
               <Link
                 href="/admin/media"
-                className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-medium text-white/80 hover:bg-white/10 hover:text-white"
+                className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-glass-bg)] px-3 py-2 text-xs font-medium admin-soft hover:bg-[var(--admin-glass-bg-2)] hover:text-[var(--admin-fg)]"
               >
                 Media library
               </Link>
@@ -338,12 +338,12 @@ export default async function AdminAnalyticsPage() {
   } catch (error) {
     return (
       <GlassCard className="p-6">
-        <div className="text-lg font-semibold text-white">Database Connection Error</div>
-        <p className="mt-2 text-sm text-white/70">
+        <div className="text-lg font-semibold admin-text">Database Connection Error</div>
+        <p className="mt-2 text-sm admin-soft">
           Could not connect to the database to fetch analytics. Please ensure your `DATABASE_URL` is correct and the
           database is accessible.
         </p>
-        <div className="mt-4 text-xs text-white/50">{String(error)}</div>
+        <div className="mt-4 text-xs admin-muted">{String(error)}</div>
       </GlassCard>
     );
   }

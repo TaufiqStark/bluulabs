@@ -80,7 +80,7 @@ export default function EditTagPage({ params }: { params: Promise<{ id: string }
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Edit Tag</h1>
         </div>
-        <button onClick={() => router.back()} className="text-sm font-medium text-white/70 hover:text-white">
+        <button onClick={() => router.back()} className="text-sm font-medium admin-soft hover:text-[var(--admin-fg)]">
           &larr; Cancel
         </button>
       </div>

@@ -80,12 +80,12 @@ export default function CreateWorkPage() {
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-white">Add new work</h1>
-          <p className="mt-1 text-sm text-white/60">Create a new project portfolio entry.</p>
+          <h1 className="text-2xl font-semibold tracking-tight admin-text">Add new work</h1>
+          <p className="mt-1 text-sm admin-muted">Create a new project portfolio entry.</p>
         </div>
         <button
           onClick={() => router.back()}
-          className="text-sm font-medium text-white/70 hover:text-white"
+          className="text-sm font-medium admin-soft hover:text-[var(--admin-fg)]"
         >
           &larr; Cancel
         </button>

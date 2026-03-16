@@ -14,12 +14,12 @@ export default async function WritingsAdminPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-white">Writings</h1>
-          <p className="mt-1 text-sm text-white/60">Manage blog posts and articles.</p>
+          <h1 className="text-2xl font-semibold tracking-tight admin-text">Writings</h1>
+          <p className="mt-1 text-sm admin-muted">Manage blog posts and articles.</p>
         </div>
         <Link
           href="/admin/writing/create"
-          className="inline-flex justify-center rounded-xl border border-white/10 bg-white/5 py-2 px-4 text-sm font-medium text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/20"
+          className="inline-flex justify-center rounded-xl border border-[var(--admin-border)] bg-[var(--admin-glass-bg)] py-2 px-4 text-sm font-medium admin-text hover:bg-[var(--admin-glass-bg-2)] focus:outline-none focus:ring-2 focus:ring-[var(--admin-focus)]"
         >
           Write New
         </Link>

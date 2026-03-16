@@ -21,19 +21,19 @@ export default async function AdminDashboardPage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-white">Overview</h1>
-          <p className="mt-1 text-sm text-white/60">A quick pulse check on your portfolio CMS.</p>
+          <h1 className="text-2xl font-semibold tracking-tight admin-text">Overview</h1>
+          <p className="mt-1 text-sm admin-muted">A quick pulse check on your portfolio CMS.</p>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {stats.map((stat) => (
             <GlassCard key={stat.name} className="p-5">
-              <div className="text-[11px] font-semibold uppercase tracking-widest text-white/50">{stat.name}</div>
+              <div className="text-[11px] font-semibold uppercase tracking-widest admin-muted">{stat.name}</div>
               <div className="mt-2 flex items-end justify-between gap-4">
-                <div className="text-3xl font-semibold tracking-tight text-white">{stat.value}</div>
+                <div className="text-3xl font-semibold tracking-tight admin-text">{stat.value}</div>
                 <Link
                   href={stat.href}
-                  className="text-xs text-white/70 hover:text-white underline underline-offset-4 decoration-white/25 hover:decoration-white/50"
+                  className="text-xs admin-soft hover:text-[var(--admin-fg)] underline underline-offset-4 decoration-current/30 hover:decoration-current/60"
                 >
                   View all
                 </Link>
@@ -47,12 +47,12 @@ export default async function AdminDashboardPage() {
           <GlassCard className="p-6">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <h2 className="text-sm font-semibold text-white">Quick actions</h2>
-                <p className="mt-1 text-sm text-white/60">Create something new without hunting menus.</p>
+                <h2 className="text-sm font-semibold admin-text">Quick actions</h2>
+                <p className="mt-1 text-sm admin-muted">Create something new without hunting menus.</p>
               </div>
               <Link
                 href="/admin/analytics"
-                className="text-xs text-white/70 hover:text-white underline underline-offset-4 decoration-white/25 hover:decoration-white/50"
+                className="text-xs admin-soft hover:text-[var(--admin-fg)] underline underline-offset-4 decoration-current/30 hover:decoration-current/60"
               >
                 Analytics
               </Link>
@@ -62,8 +62,8 @@ export default async function AdminDashboardPage() {
               <Link
                 href="/admin/work/create"
                 className={[
-                  "rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white",
-                  "hover:bg-white/10",
+                  "rounded-xl border border-[var(--admin-border)] bg-[var(--admin-glass-bg)] px-4 py-3 text-sm font-medium admin-text",
+                  "hover:bg-[var(--admin-glass-bg-2)]",
                 ].join(" ")}
               >
                 Add new work
@@ -71,8 +71,8 @@ export default async function AdminDashboardPage() {
               <Link
                 href="/admin/experiments/create"
                 className={[
-                  "rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white",
-                  "hover:bg-white/10",
+                  "rounded-xl border border-[var(--admin-border)] bg-[var(--admin-glass-bg)] px-4 py-3 text-sm font-medium admin-text",
+                  "hover:bg-[var(--admin-glass-bg-2)]",
                 ].join(" ")}
               >
                 Add experiment
@@ -80,8 +80,8 @@ export default async function AdminDashboardPage() {
               <Link
                 href="/admin/writing/create"
                 className={[
-                  "rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white",
-                  "hover:bg-white/10",
+                  "rounded-xl border border-[var(--admin-border)] bg-[var(--admin-glass-bg)] px-4 py-3 text-sm font-medium admin-text",
+                  "hover:bg-[var(--admin-glass-bg-2)]",
                 ].join(" ")}
               >
                 Write post
@@ -91,11 +91,11 @@ export default async function AdminDashboardPage() {
           
           {/* Recent Activity (Placeholder) */}
           <GlassCard className="p-6">
-            <h2 className="text-sm font-semibold text-white">Recent activity</h2>
-            <div className="mt-3 rounded-xl border border-white/10 bg-white/5 px-4 py-6 text-center text-sm text-white/60">
+            <h2 className="text-sm font-semibold admin-text">Recent activity</h2>
+            <div className="mt-3 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-glass-bg)] px-4 py-6 text-center text-sm admin-muted">
               Activity integration coming soon.
             </div>
-            <div className="mt-3 text-xs text-white/50">
+            <div className="mt-3 text-xs admin-muted">
               Tip: track edits + publishes to build a real activity feed.
             </div>
           </GlassCard>
@@ -105,12 +105,12 @@ export default async function AdminDashboardPage() {
   } catch (error) {
     return (
       <GlassCard className="p-6 border-red-500/30 bg-red-500/10">
-        <h2 className="text-lg font-semibold text-white">Database Connection Error</h2>
-        <p className="mt-2 text-sm text-white/70">
+        <h2 className="text-lg font-semibold admin-text">Database Connection Error</h2>
+        <p className="mt-2 text-sm admin-soft">
           Could not connect to the database to fetch stats. Please ensure your `DATABASE_URL` is correct and the database
           is accessible.
         </p>
-        <div className="mt-4 text-xs text-white/50">{String(error)}</div>
+        <div className="mt-4 text-xs admin-muted">{String(error)}</div>
       </GlassCard>
     );
   }

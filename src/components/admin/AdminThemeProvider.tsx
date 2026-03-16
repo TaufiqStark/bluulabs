@@ -23,6 +23,15 @@ export function AdminThemeProvider({
   const [theme, setTheme] = useState<AdminTheme>(defaultTheme);
 
   useEffect(() => {
+    try {
+      const stored = localStorage.getItem("admin-theme");
+      if (stored === "light" || stored === "dark") setTheme(stored);
+    } catch {
+      // Ignore storage errors (private mode, disabled storage, etc.)
+    }
+  }, []);
+
+  useEffect(() => {
     // Apply design tokens as CSS variables so Tailwind + raw CSS can use them.
     const vars = getCSSVariables(theme);
     const root = document.documentElement;
@@ -33,6 +42,12 @@ export function AdminThemeProvider({
 
     document.body.setAttribute("data-active-theme", theme);
     document.body.setAttribute("data-admin", "true");
+
+    try {
+      localStorage.setItem("admin-theme", theme);
+    } catch {
+      // Ignore storage errors
+    }
 
     return () => {
       document.body.removeAttribute("data-admin");

@@ -82,7 +82,7 @@ export default function EditCategoryPage({ params }: { params: Promise<{ id: str
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Edit Category</h1>
         </div>
-        <button onClick={() => router.back()} className="text-sm font-medium text-white/70 hover:text-white">
+        <button onClick={() => router.back()} className="text-sm font-medium admin-soft hover:text-[var(--admin-fg)]">
           &larr; Cancel
         </button>
       </div>

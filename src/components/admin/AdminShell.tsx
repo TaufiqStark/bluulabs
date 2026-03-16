@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ComponentType } from "react";
 import {
   FiBarChart2,
@@ -17,7 +17,10 @@ import {
   FiMenu,
   FiX,
   FiArrowLeft,
+  FiChevronLeft,
 } from "react-icons/fi";
+import ThemeToggle from "./ThemeToggle";
+import { useAdminTheme } from "./AdminThemeProvider";
 
 type NavItem = {
   href: string;
@@ -36,13 +39,15 @@ function NavLink({
   icon: Icon,
   isActive,
   isDark,
-}: NavItem & { isActive: boolean; isDark: boolean }) {
+  collapsed,
+}: NavItem & { isActive: boolean; isDark: boolean; collapsed: boolean }) {
   return (
     <Link
       href={href}
       className={[
         "group flex items-center gap-3 rounded-xl px-3 py-2 text-sm",
         "border border-transparent",
+        collapsed ? "justify-center" : "",
         isActive
           ? isDark
             ? "bg-white/10 border-white/10 text-white"
@@ -58,7 +63,7 @@ function NavLink({
           isActive ? (isDark ? "text-white" : "text-black/80") : isDark ? "text-white/60 group-hover:text-white" : "text-black/45 group-hover:text-black/80",
         ].join(" ")}
       />
-      <span className="truncate">{label}</span>
+      <span className={collapsed ? "sr-only" : "truncate"}>{label}</span>
     </Link>
   );
 }
@@ -66,7 +71,27 @@ function NavLink({
 export default function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const isDark = true;
+  const { theme } = useAdminTheme();
+  const isDark = theme === "dark";
+
+  const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("admin-sidebar-collapsed");
+      if (stored === "1") setCollapsed(true);
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("admin-sidebar-collapsed", collapsed ? "1" : "0");
+    } catch {
+      // ignore
+    }
+  }, [collapsed]);
 
   const navGroups = useMemo<NavGroup[]>(
     () => [
@@ -116,12 +141,14 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           >
             <FiGrid className={["h-4 w-4", isDark ? "text-white" : "text-black/80"].join(" ")} />
           </span>
-          <div className="leading-tight">
-            <div className={["text-sm font-semibold tracking-tight", isDark ? "text-white" : "text-black/90"].join(" ")}>
-              Admin
+          {!collapsed && (
+            <div className="leading-tight">
+              <div className={["text-sm font-semibold tracking-tight", isDark ? "text-white" : "text-black/90"].join(" ")}>
+                Admin
+              </div>
+              <div className={["text-[11px]", isDark ? "text-white/60" : "text-black/55"].join(" ")}>Bluulabs CMS</div>
             </div>
-            <div className={["text-[11px]", isDark ? "text-white/60" : "text-black/55"].join(" ")}>Bluulabs CMS</div>
-          </div>
+          )}
         </Link>
       </div>
 
@@ -132,14 +159,16 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
       <nav className="flex-1 overflow-y-auto px-2 pb-4">
         {navGroups.map((group) => (
           <div key={group.label} className="mb-4">
-            <div
-              className={[
-                "px-3 pb-2 text-[11px] font-semibold uppercase tracking-widest",
-                isDark ? "text-white/45" : "text-black/45",
-              ].join(" ")}
-            >
-              {group.label}
-            </div>
+            {!collapsed && (
+              <div
+                className={[
+                  "px-3 pb-2 text-[11px] font-semibold uppercase tracking-widest",
+                  isDark ? "text-white/45" : "text-black/45",
+                ].join(" ")}
+              >
+                {group.label}
+              </div>
+            )}
             <div className="space-y-1">
               {group.items.map((item) => (
                 <NavLink
@@ -147,6 +176,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                   {...item}
                   isActive={pathname === item.href || (item.href !== "/admin/dashboard" && pathname.startsWith(item.href))}
                   isDark={isDark}
+                  collapsed={collapsed}
                 />
               ))}
             </div>
@@ -210,7 +240,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
       <div className="relative mx-auto max-w-[1600px]">
         <div className="flex">
           {/* Desktop sidebar */}
-          <aside className="hidden lg:block w-[280px] shrink-0">
+          <aside className={["hidden lg:block shrink-0", collapsed ? "w-[92px]" : "w-[280px]"].join(" ")}>
             <div className="sticky top-0 h-screen p-4">
               <div
                 className={[
@@ -263,7 +293,26 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3" />
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setCollapsed((v) => !v)}
+                      className={[
+                        "hidden lg:inline-flex h-10 w-10 items-center justify-center rounded-xl border",
+                        isDark ? "border-white/10 bg-white/5 hover:bg-white/10" : "border-black/10 bg-white/60 hover:bg-white",
+                      ].join(" ")}
+                      aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+                    >
+                      <FiChevronLeft
+                        className={[
+                          "h-5 w-5 transition-transform duration-300",
+                          collapsed ? "rotate-180" : "rotate-0",
+                          isDark ? "text-white" : "text-black/80",
+                        ].join(" ")}
+                      />
+                    </button>
+                    <ThemeToggle />
+                  </div>
                 </div>
               </div>
             </header>
