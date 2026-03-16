@@ -110,7 +110,7 @@ export default function EditWorkPage({ params }: { params: Promise<{ id: string 
         </div>
         <button
           onClick={() => router.back()}
-          className="text-sm font-medium text-gray-600 hover:text-gray-900"
+          className="text-sm font-medium text-white/70 hover:text-white"
         >
           &larr; Cancel
         </button>
