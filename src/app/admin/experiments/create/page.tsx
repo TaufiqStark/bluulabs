@@ -84,10 +84,10 @@ export default function CreateExperimentPage() {
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Add New Experiment</h1>
-          <p className="text-gray-500 mt-1">Create a new mini-project entry.</p>
+          <h1 className="text-2xl font-semibold tracking-tight admin-text">Add new experiment</h1>
+          <p className="mt-1 text-sm admin-muted">Create a new mini-project entry.</p>
         </div>
-        <button onClick={() => router.back()} className="text-sm font-medium text-gray-600 hover:text-gray-900">
+        <button onClick={() => router.back()} className="text-sm font-medium admin-soft hover:text-[var(--admin-fg)]">
           &larr; Cancel
         </button>
       </div>

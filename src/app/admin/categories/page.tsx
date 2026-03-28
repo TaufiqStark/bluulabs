@@ -14,12 +14,12 @@ export default async function CategoriesAdminPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Categories</h1>
-          <p className="text-gray-500 mt-1">Manage taxonomy categories for your content.</p>
+          <h1 className="text-2xl font-semibold tracking-tight admin-text">Categories</h1>
+          <p className="mt-1 text-sm admin-muted">Manage taxonomy categories for your content.</p>
         </div>
         <Link
           href="/admin/categories/create"
-          className="inline-flex justify-center rounded-md border border-transparent bg-gray-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+          className="inline-flex justify-center rounded-xl border border-[var(--admin-border)] bg-[var(--admin-glass-bg)] py-2 px-4 text-sm font-medium admin-text hover:bg-[var(--admin-glass-bg-2)] focus:outline-none focus:ring-2 focus:ring-[var(--admin-focus)]"
         >
           Add New
         </Link>

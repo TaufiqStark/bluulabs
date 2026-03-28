@@ -53,9 +53,9 @@ export default function CreateTagPage() {
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Add New Tag</h1>
+          <h1 className="text-2xl font-semibold tracking-tight admin-text">Add new tag</h1>
         </div>
-        <button onClick={() => router.back()} className="text-sm font-medium text-gray-600 hover:text-gray-900">
+        <button onClick={() => router.back()} className="text-sm font-medium admin-soft hover:text-[var(--admin-fg)]">
           &larr; Cancel
         </button>
       </div>
