@@ -106,7 +106,7 @@ export default function EditWritingPage({ params }: { params: Promise<{ id: stri
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Edit Post</h1>
         </div>
-        <button onClick={() => router.back()} className="text-sm font-medium text-gray-600 hover:text-gray-900">
+        <button onClick={() => router.back()} className="text-sm font-medium admin-soft hover:text-[var(--admin-fg)]">
           &larr; Cancel
         </button>
       </div>

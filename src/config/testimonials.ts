@@ -14,20 +14,20 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
     {
         quote:
-            "Taufiq has an incredible ability to translate complex requirements into elegant, maintainable solutions.",
+            "Taufiq doesn’t just ship features, he brings structure. The codebase got cleaner, the UI got sharper, and the team moved faster.",
         name: "Alex Chen",
-        role: "CTO at TechFlow",
+        role: "CTO · Product & Engineering",
     },
     {
         quote:
-            "Working with Taufiq was outstanding. Every project was completed ahead of schedule with exceptional craftsmanship.",
+            "He’s rare: strong taste, solid engineering instincts, and calm execution under pressure. The handoff was spotless.",
         name: "Sarah Miller",
-        role: "Product Lead at Nexus",
+        role: "Product Lead · B2B SaaS",
     },
     {
         quote:
-            "His combination of technical skill and design sensibility is rare and invaluable.",
+            "The work felt intentional end to end: information architecture, micro-interactions, and performance. It elevated the whole product.",
         name: "James Park",
-        role: "Founder at CloudBase",
+        role: "Founder · Startup Studio",
     },
 ];
