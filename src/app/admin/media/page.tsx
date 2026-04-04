@@ -14,11 +14,11 @@ export default async function MediaAdminPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Media Library</h1>
-          <p className="text-gray-500 mt-1">Manage files and images uploaded to your portfolio.</p>
+          <h1 className="text-2xl font-semibold tracking-tight admin-text">Media library</h1>
+          <p className="mt-1 text-sm admin-muted">Manage files and images uploaded to your portfolio.</p>
         </div>
         <button
-          className="inline-flex justify-center rounded-md border border-transparent bg-gray-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 opacity-50 cursor-not-allowed"
+          className="inline-flex justify-center rounded-xl border border-[var(--admin-border)] bg-[var(--admin-glass-bg)] py-2 px-4 text-sm font-medium admin-text opacity-60 cursor-not-allowed"
           title="Upload via Editor.js for now"
         >
           Upload New

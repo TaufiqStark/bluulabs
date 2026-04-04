@@ -30,8 +30,8 @@ export const projects: Project[] = [
         tags: ["React", "TypeScript", "D3.js", "WebSocket"],
         badges: ["Real-time data pipeline", "10k+ data points/sec"],
         imageSrc: "/project-1.png",
-        accentColor: "#2dd4bf",
-        glowColor: "rgba(45, 212, 191, 0.06)",
+        accentColor: "#60a5fa",
+        glowColor: "rgba(96, 165, 250, 0.06)",
         link: "#",
     },
     {
