@@ -13,6 +13,27 @@ export default function CursorDot() {
         const dot = dotRef.current;
         if (!dot) return;
 
+        const getAccent = () => {
+            const raw = getComputedStyle(document.documentElement).getPropertyValue("--color-accent-teal").trim();
+            return raw || "#60a5fa";
+        };
+
+        const toGlowShadow = (color: string) => {
+            // Supports hex (#rrggbb) or rgb/rgba() input.
+            const hex = color.startsWith("#") ? color.slice(1) : "";
+            if (hex.length === 6) {
+                const r = parseInt(hex.slice(0, 2), 16);
+                const g = parseInt(hex.slice(2, 4), 16);
+                const b = parseInt(hex.slice(4, 6), 16);
+                return `0 0 16px rgba(${r}, ${g}, ${b}, 0.42)`;
+            }
+            const rgb = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+            if (rgb) {
+                return `0 0 16px rgba(${rgb[1]}, ${rgb[2]}, ${rgb[3]}, 0.42)`;
+            }
+            return "0 0 16px rgba(96, 165, 250, 0.42)";
+        };
+
         // Cache dot-grid-reveal sections
         const revealSections = document.querySelectorAll<HTMLElement>(".dot-grid-reveal");
 
@@ -49,8 +70,9 @@ export default function CursorDot() {
                 dot.style.height = "10px";
             } else if (!light && !isDark.current) {
                 isDark.current = true;
-                dot.style.background = "#2dd4bf";
-                dot.style.boxShadow = "0 0 16px rgba(45, 212, 191, 0.4)";
+                const accent = getAccent();
+                dot.style.background = accent;
+                dot.style.boxShadow = toGlowShadow(accent);
                 dot.style.width = "12px";
                 dot.style.height = "12px";
             }
@@ -85,7 +107,7 @@ export default function CursorDot() {
         };
     }, []);
 
-    return (
+        return (
         <div
             ref={dotRef}
             className="fixed top-0 left-0 pointer-events-none z-[9999]"
@@ -100,14 +122,4 @@ export default function CursorDot() {
             }}
         />
     );
-}
-
-function isLightColor(bgColor: string): boolean {
-    const match = bgColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-    if (!match) return true;
-    const r = parseInt(match[1]);
-    const g = parseInt(match[2]);
-    const b = parseInt(match[3]);
-    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-    return luminance > 0.5;
 }

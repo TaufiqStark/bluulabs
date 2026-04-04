@@ -106,7 +106,7 @@ body[data-admin="true"] {
   --admin-glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 40px 120px rgba(0, 0, 0, 0.45);
   --admin-input-bg: rgba(0, 0, 0, 0.22);
   --admin-input-border: rgba(255, 255, 255, 0.14);
-  --admin-focus: rgba(45, 212, 191, 0.4);
+  --admin-focus: rgba(96, 165, 250, 0.4);
 }
 
 body[data-admin="true"][data-active-theme="light"] {
@@ -399,6 +399,24 @@ body[data-active-theme="light"]::after {
 
 .animate-slide-in {
   animation: slide-in 0.6s var(--ease-out) forwards;
+}
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation: none !important;
+    transform: none !important;
+  }
 }
 
 /* Stagger children */

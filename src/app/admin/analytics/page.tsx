@@ -30,7 +30,8 @@ function MiniBars({ values }: { values: number[] }) {
             width={barW}
             height={barH}
             rx={6}
-            fill="rgba(45, 212, 191, 0.65)"
+            fill="var(--color-accent-teal)"
+            fillOpacity={0.65}
           />
         );
       })}

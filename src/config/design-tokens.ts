@@ -38,7 +38,9 @@ export const colors = {
 
   /** Accent palette */
   accent: {
-    teal: "#2dd4bf",
+    // Historically "teal" was the main accent. We keep the key for compatibility,
+    // but shift the palette toward blue while preserving contrast on dark surfaces.
+    teal: "#60a5fa",
     pink: "#f472b6",
     purple: "#a78bfa",
     blue: "#60a5fa",
@@ -46,7 +48,7 @@ export const colors = {
 
   /** Glow overlays */
   glow: {
-    teal: "rgba(45, 212, 191, 0.15)",
+    teal: "rgba(96, 165, 250, 0.15)",
     pink: "rgba(244, 114, 182, 0.15)",
     purple: "rgba(167, 139, 250, 0.15)",
     blue: "rgba(96, 165, 250, 0.15)",
